@@ -9,7 +9,7 @@
           <view class="weui-label">手机号 :</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入手机号" />
+          <input class="weui-input" placeholder="请输入手机号" bindinput="phoneInput" type='number'/>
         </view>
       </view>
       <view class="weui-cell weui-cell_input">
@@ -17,10 +17,10 @@
           <view class="weui-label">唯一号 :</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入唯一号" />
+          <input class="weui-input" placeholder="请输入唯一号" bindinput="identifyInput"/>
         </view>
       </view>
     </view>
-    <button class="weui-btn" type="primary" plain="true" bindtap="bindViewTap">绑定</button>
+    <button class="weui-btn" type="primary" plain="true" bindtap="beginBind">绑定</button>
   </view>
 </view>
