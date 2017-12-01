@@ -13,6 +13,7 @@ App({
         this.func.req('accesstoken?code='+res.code+'&token=wx111', {}, function (res) {
           var openid = res;
           if(openid>0){
+            tihs.globalData.openid = openid;
             console.log('openid:'+openid);
           }else{
             wx.redirectTo({
@@ -48,6 +49,9 @@ App({
     req: http.req
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    openid:'',
+    token:'',
+    userid:''
   }
 })

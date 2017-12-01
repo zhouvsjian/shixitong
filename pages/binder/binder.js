@@ -1,10 +1,12 @@
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    phone:"",
+    identify:""
   },
 
   /**
@@ -62,9 +64,34 @@ Page({
   onShareAppMessage: function () {
     
   },
-  bindViewTap: function () {
+  phoneInput: function (e) {
+    this.setData({
+      phone: e.detail.value
+    })
+  },
+  identifyInput: function(e) {
+    this.setData({
+      identify:e.detail.value
+    })
+  },
+  beginBind: function () {
+    if(!this.data.phone){
+      wx.showToast({
+        title: '手机号不能为空'
+      })
+      return;
+    }
+    if(!this.data.identify){
+      wx.showToast({
+        title: '唯一号不能为空',
+      })
+      return;
+    }
+    app.func.req('bind?token=wx111&openid=' + app.globalData.openid + '&phone='+this.data.phone + '&keyid=' + this.data.identify, {}, function (res) {
+      console.log(res.length)
+    }); 
     wx.navigateTo({
       url: '../logs/logs'
     })
-  },
+  }
 })
