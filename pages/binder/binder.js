@@ -1,3 +1,4 @@
+const app = getApp();
 Page({
 
   /**
@@ -86,6 +87,9 @@ Page({
       })
       return;
     }
+    app.func.req('bind?token=wx111&openid=' + openid + '&phone='+this.data.phone + '&keyid=' + this.data.identify, {}, function (res) {
+      console.log(res.length)
+    }); 
     wx.navigateTo({
       url: '../logs/logs'
     })
