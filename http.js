@@ -1,4 +1,4 @@
-var root = 'http://nksxxt.njpi.edu.cn/';
+var root = 'http://www.xiaoqt.net/';
 function req(url,data,callback){
   wx.request({
     url: root+url,
