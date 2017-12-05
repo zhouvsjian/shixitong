@@ -52,6 +52,7 @@ App({
     userInfo: null,
     openid:'',
     token:'',
-    userid:''
+    userid:'',
+    roleid:''
   }
 })
