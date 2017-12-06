@@ -14,17 +14,29 @@ Page({
   onLoad: function (options) {
     switch(app.globalData.roleid){
       case '7'://学生
-        menuData = [{name:'个人中心',url:''},{name:'实习登记',url:''},{name:'签到请假',url:''},{name:'简历管理',url:''},{name:'查找岗位',url:''},
-                  {name:'职位申请',url:''},{name:'消息中心',url:''},{name:'任务列表',url:''},{name:'报告管理',url:''}];
+        this.menuData = [{name:'个人中心',url:'',icon:'user'},{name:'实习登记',url:'',icon:'user'},{name:'签到请假',url:'',icon:'user'},
+                    {name:'简历管理',url:'',icon:'user'},{name:'查找岗位',url:'',icon:'user'},{name:'职位申请',url:'',icon:'user'},
+                    {name:'消息中心',url:'',icon:'user'},{name:'任务列表',url:'',icon:'user'},{name:'报告管理',url:'',icon:'user'}];
         break;
       case '4'://辅导员
       case '9'://班主任
+       this.menuData = [{name:'个人资料',url:'',icon:'user'},{name:'实习任务',url:'',icon:'user'},{name:'考勤管理',url:'',icon:'user'},
+                    {name:'消息中心',url:'',icon:'user'},{name:'实习走访',url:'',icon:'user'},{name:'批次管理',url:'',icon:'user'}];
         break;
       case '3'://导师
+        this.menuData = [{name:'个人资料',url:'',icon:'user'},{name:'实习审核',url:'',icon:'user'},{name:'查阅报告',url:'',icon:'user'},
+                    {name:'实习任务',url:'',icon:'user'},{name:'考勤管理',url:'',icon:'user'},{name:'实习评分',url:'',icon:'user'},
+                    {name:'消息中心',url:'',icon:'user'},{name:'实习走访',url:'',icon:'user'},{name:'批次管理',url:'',icon:'user'}];
         break;
       case '6'://师傅
+        this.menuData = [{name:'个人资料',url:'',icon:'user'},{name:'学生任务',url:'',icon:'user'},{name:'查阅报告',url:'',icon:'user'},
+                    {name:'实习评分',url:'',icon:'user'},{name:'考勤管理',url:'',icon:'user'},{name:'消息中心',url:'',icon:'user'}];
         break;
     }
+    var that = this;
+    that.setData({  
+        menuData: that.menuData  
+      })
   },
 
   /**

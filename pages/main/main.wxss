@@ -1,1 +1,4 @@
 /* pages/main/main.wxss */
+.glyphicon{
+    width: 100rpx;
+}
