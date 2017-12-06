@@ -1,4 +1,5 @@
 /* pages/main/main.wxss */
-.glyphicon{
-    width: 100rpx;
+.weui-grid{
+    padding: 0 6px;  
+    text-align: center;  
 }
