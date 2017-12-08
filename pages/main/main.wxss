@@ -1,5 +1,59 @@
 /* pages/main/main.wxss */
 .weui-grid{
-    padding: 0 6px;  
-    text-align: center;  
+    padding: 10px 6px;  
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.glyphicon{
+    font-size: 60px;
+    color: #ffffff;
+}
+.menulabel{
+    font-size: 16px;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-family: Microsoft YaHei, Helvitica, Verdana, Tohoma, Arial, san-serif;
+}
+
+.weui-grid:nth-child(8n+1) {
+    background-color: #36A1DB;
+    border-radius: 10px;
+}
+
+.weui-grid:nth-child(8n+2) {
+    background-color: #678ce1;
+    border-radius: 10px;
+}
+
+.weui-grid:nth-child(8n+3) {
+    background-color: #8c67df;
+    border-radius: 10px;
+}
+
+.weui-grid:nth-child(8n+4) {
+    background-color: #84d018;
+    border-radius: 10px;
+}
+
+.weui-grid:nth-child(8n+5) {
+    background-color: #14c760;
+    border-radius: 10px;
+}
+
+.weui-grid:nth-child(8n+6) {
+    background-color: #f3b613;
+    border-radius: 10px;
+}
+
+.weui-grid:nth-child(8n+7) {
+    background-color: #ff8a4a;
+    border-radius: 10px;
+}
+
+.weui-grid:nth-child(8n+8) {
+    background-color: #fc5366;
+    border-radius: 10px;
 }
