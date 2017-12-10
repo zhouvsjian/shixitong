@@ -91,6 +91,7 @@ Page({
     wx.navigateTo({
       url: '../main/main'
     });
+    
     /** 
     app.func.req('bind?token=wx111&openid=' + app.globalData.openid + '&phone='+this.data.phone + '&keyid=' + this.data.identify, {}, function (res) {
       console.log(res.length)

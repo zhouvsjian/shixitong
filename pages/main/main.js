@@ -14,8 +14,8 @@ Page({
   onLoad: function (options) {
     switch(app.globalData.roleid){
       case '7'://学生
-        this.menuData = [{name:'个人中心',url:'',icon:'user'},{name:'实习登记',url:'',icon:'pencil'},{name:'签到请假',url:'',icon:'edit'},
-                    {name:'简历管理',url:'',icon:'book'},{name:'查找岗位',url:'',icon:'search'},{name:'职位申请',url:'',icon:'shopping-cart'},
+        this.menuData = [{name:'个人中心',url:'../sub/common/userinfo',icon:'user'},{name:'实习登记',url:'',icon:'pencil'},{name:'签到请假',url:'',icon:'edit'},
+                    {name:'简历管理',url:'',icon:'book'},{name:'查找岗位',url:'../sub/common/search',icon:'search'},{name:'职位申请',url:'',icon:'shopping-cart'},
                     {name:'消息中心',url:'',icon:'envelope'},{name:'任务列表',url:'',icon:'tasks'},{name:'报告管理',url:'',icon:'file'}];
         break;
       case '4'://辅导员

@@ -8,7 +8,7 @@
                     <view class="weui-label">姓名</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入姓名" disabled="disabled"/>
+                    <input class="weui-input" value="{{user.name}}" placeholder="请输入姓名" disabled="disabled"/>
                 </view>
             </view>
             <view class="weui-cell weui-cell_input">
@@ -16,7 +16,7 @@
                     <view class="weui-label">性别</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入性别"/>
+                    <input class="weui-input" value="{{user.sex}}" placeholder="请输入性别" disabled="disabled"/>
                 </view>
             </view>
             <view class="weui-cell weui-cell_input">
@@ -24,7 +24,7 @@
                     <view class="weui-label">手机号</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入手机号"/>
+                    <input class="weui-input" value="{{user.phone}}" placeholder="请输入手机号" disabled="{{disabled}}" bindinput="phoneInput"/>
                 </view>
             </view>
             <view class="weui-cell weui-cell_input weui-cell_vcode">
@@ -32,13 +32,13 @@
                     <view class="weui-label">邮箱</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入邮箱" />
+                    <input class="weui-input" value="{{user.email}}" placeholder="请输入邮箱" disabled="{{disabled}}" bindinput="emailInput"/>
                 </view>
             </view>
         </view>
         <view class="weui-cells__tips">底部说明文字底部说明文字</view>
 
         <view class="weui-btn-area">
-            <button class="weui-btn" type="primary" bindtap="showTopTips">编辑</button>
+            <button class="weui-btn" type="primary" bindtap="onBtnTapped">{{buttonLabel}}</button>
         </view>
     </view>

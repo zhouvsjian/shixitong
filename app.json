@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/binder/binder",
     "pages/main/main",
-    "pages/sub/common/userinfo"
+    "pages/sub/common/userinfo",
+    "pages/sub/common/search"
   ],
   "window": {
     "backgroundTextStyle": "light",
