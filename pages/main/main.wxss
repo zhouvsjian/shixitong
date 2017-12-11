@@ -1,7 +1,10 @@
 /* pages/main/main.wxss */
 .weui-grid{
     padding: 10px 6px;
-    margin: 2px;  
+    margin: 2px;
+    width: 30%; 
+    margin-left: 2.5%;
+    margin-top: 2.5%; 
     text-align: center;
 }
 .glyphicon{
