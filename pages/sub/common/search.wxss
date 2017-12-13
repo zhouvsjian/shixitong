@@ -1,1 +1,4 @@
 /* pages/sub/common/search.wxss */
+.weui-cell_input{
+    height: 50px;
+}
