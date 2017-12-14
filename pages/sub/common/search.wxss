@@ -2,3 +2,22 @@
 .weui-cell_input{
     height: 50px;
 }
+.weui-cell_input label{
+    width: 100px;
+}
+.label{
+    margin-left: 10px;
+}
+.glyphicon-chevron-right{
+    margin-left: 5px;
+}
+.weui-search-bar__input{
+    font-size: 18px;
+    height: 36px;
+}
+#locationLabel,#positionLabel,#industryLabel{
+    width: 180px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}

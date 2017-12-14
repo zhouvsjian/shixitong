@@ -51,7 +51,7 @@ App({
   globalData: {
     userInfo: null,
     openid:'',
-    token:'',
+    token:'wx111',
     userid:'',
     roleid:''
   }
