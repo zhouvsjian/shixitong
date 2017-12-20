@@ -16,9 +16,6 @@ Page({
     })
   },
   onLoad: function () {
-    app.func.req('/list/industry?token=wx111', {}, function (res) {
-      console.log(res.length)
-    }); 
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

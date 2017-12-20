@@ -6,14 +6,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    joblist:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    if(options.action == "list"){
+      var that = this;
+      app.func.req("/list/work?token="+app.globalData.token,{},function (res) {
+        console.log('jobs:'+res.length)
+        that.setData({
+          joblist:res
+        })
+      });
+    }else{
+      console.log('search')
+    }
   },
 
   /**

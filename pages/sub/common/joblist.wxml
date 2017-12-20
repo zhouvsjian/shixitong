@@ -1,2 +1,18 @@
 <!--pages/sub/common/joblist.wxml-->
-<text>pages/sub/common/joblist.wxml</text>
+<view class="page__bd">
+  <view class="page__hd">
+    <view class="page__title">职位列表</view>
+  </view>
+    <scroll-view class="scroll" scroll-y="true">
+        <view wx:for="{{joblist}}" wx:key="name">
+            <navigator class="list-item" url="../home/home?id={{item.JOB_ID}}" hover-class="navigator-hover">
+                <view class="right">
+                    <text class="title">{{item.POST_NAME}}</text>
+                </view>
+                <view>
+                    <text class="intro">{{item.COMPANY_NAME+"|"+item.EDUCATION+"|"+item.LOCATION+"|"+item.PUBLISH_TIME}}</text>
+                </view>
+            </navigator>
+        </view>
+    </scroll-view>
+</view>

@@ -111,7 +111,7 @@ Page({
   onBeginSearch:function(){
     if(this.data.keyword){
       wx.navigateTo({
-      url:'joblist?action="search"&keyword='+this.data.keyword+'&location='+this.data.locationName+'&post='+this.data.postName+'&industry='+this.data.industryName
+      url:'joblist?action=search&keyword='+this.data.keyword+'&location='+this.data.locationName+'&post='+this.data.postName+'&industry='+this.data.industryName
     })
     }else{
       wx.showToast({
@@ -121,7 +121,7 @@ Page({
   },
   onJobList:function(){
     wx.navigateTo({
-      url:'joblist?action="list"'
+      url:'joblist?action=list'
     })
   }
 })
