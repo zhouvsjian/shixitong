@@ -88,7 +88,7 @@ Page({
       return;
     }
     app.globalData.roleid = "7";
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../main/main'
     });
     

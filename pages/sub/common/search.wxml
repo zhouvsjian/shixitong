@@ -47,6 +47,9 @@
       <view class="weui-btn-area">
         <button class="weui-btn" type="primary" bindtap="onBeginSearch">搜索</button>
       </view>
+      <view class="weui-btn-area">
+        <view  bindtap="onJobList"><view class="glyphicon glyphicon-flash" style="color:#0000ff">最新工作</view></view>
+      </view>
     </view>
   </view>
 </view>

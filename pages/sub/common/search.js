@@ -110,11 +110,18 @@ Page({
   },
   onBeginSearch:function(){
     if(this.data.keyword){
-
+      wx.navigateTo({
+      url:'joblist?action="search"&keyword='+this.data.keyword+'&location='+this.data.locationName+'&post='+this.data.postName+'&industry='+this.data.industryName
+    })
     }else{
       wx.showToast({
         title: '请输入关键字'
       });
     }
+  },
+  onJobList:function(){
+    wx.navigateTo({
+      url:'joblist?action="list"'
+    })
   }
 })

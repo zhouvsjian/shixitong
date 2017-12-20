@@ -5,7 +5,8 @@
     "pages/binder/binder",
     "pages/main/main",
     "pages/sub/common/userinfo",
-    "pages/sub/common/search"
+    "pages/sub/common/search",
+    "pages/sub/common/joblist"
   ],
   "window": {
     "backgroundTextStyle": "light",
