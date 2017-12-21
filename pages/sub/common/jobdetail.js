@@ -1,4 +1,4 @@
-// pages/sub/common/joblist.js
+// pages/sub/common/jobdetail.js
 const app = getApp();
 Page({
 
@@ -6,41 +6,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-    joblist:[]
+    jobdetail:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if(options.action == "list"){
+    var jobid = options.id;
+    if(jobid){
       var that = this;
-      app.func.req("/list/work?token="+app.globalData.token,{},function (res) {
+      app.func.req("/work?token=" + app.globalData.token+"&jobid="+jobid+"&userid="+app.globalData.userid, {}, function (res) {
+        console.log('jobdetail' + res.COMPANY_NAME)
         that.setData({
-          joblist:res
-        })
-      });
-    }else{
-      var keyword = options.keyword;
-			var city = options.location;
-			var post = options.post;
-			var industry = options.industry;
-      var that = this;
-      var param = {};
-      param["userid"] = app.globalData.userid;
-      param["keyword"] = keyword;
-      if(city!="不限"){
-        param["city"] = city;
-      }
-      if(post !="不限"){
-        param["post"] = post;
-      }
-      if(industry!="不限"){
-        param["industry"] = industry;
-      }
-      app.func.req("/search/work?token="+app.globalData.token,param,function(res){
-        that.setData({
-          joblist:res
+          jobdetail: res
         })
       });
     }
