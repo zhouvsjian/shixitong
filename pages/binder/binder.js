@@ -88,6 +88,7 @@ Page({
       return;
     }
     app.globalData.roleid = "7";
+    app.globalData.userid = "USR20171116101242119";
     wx.redirectTo({
       url: '../main/main'
     });

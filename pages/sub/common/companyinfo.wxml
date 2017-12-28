@@ -1,0 +1,48 @@
+<!--pages/sub/common/companyinfo.wxml-->
+<view class="page__bd">
+    <view class="page__title">{{company.NAME}}</view>
+   <view class="page__bd">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+         <view class="weui-cell__hd">
+          <view class="weui-label cate-name">企业性质</view>
+        </view>
+         <view class="weui-cell__bd">
+          <view>{{company.CATAGORY_NAME}}</view>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label cate-name">规模</view>
+        </view>
+        <view class="weui-cell__bd">
+          <view>{{company.PEOPLE_SUM}}</view>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label cate-name">所属行业</view>
+        </view>
+        <view class="weui-cell__bd">
+         <view>{{company.INDUSTRY}}</view>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label cate-name">公司地址</view>
+        </view>
+        <view class="weui-cell__bd">
+         <view>{{company.ADDRESS}}</view>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label cate-name">公司介绍</view>
+        </view>
+      </view>
+      <view class="weui-cell__bd">
+         <textarea class="weui-textarea" disabled="disabled" value="{{company.SUMMARY}}" />
+      </view>
+    </view>
+  </view>
+</view>

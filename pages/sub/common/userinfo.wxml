@@ -16,7 +16,7 @@
         <view class="weui-label">性别</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" value="{{user.sex}}" placeholder="请输入性别" disabled="disabled" />
+        <input class="weui-input" value="{{user.sex==1?'男':'女'}}" placeholder="请输入性别" disabled="disabled" />
       </view>
     </view>
     <view class="weui-cell weui-cell_input">

@@ -1,4 +1,4 @@
-// pages/sub/common/jobdetail.js
+// pages/sub/common/companyinfo.js
 const app = getApp();
 Page({
 
@@ -6,22 +6,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-    jobdetail:{}
+    company:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var jobid = options.id;
-    if(jobid){
-      var that = this;
-      app.func.req("/work?token=" + app.globalData.token+"&jobid="+jobid+"&userid="+app.globalData.userid, {}, function (res) {
+     var companyid = options.companyid;
+     if(companyid){
+       var that = this;
+       app.func.req("/company?token=" + app.globalData.token+"&companyid="+companyid, {}, function (res) {
         that.setData({
-          jobdetail: res
+          company: res
         })
       });
-    }
+     }
   },
 
   /**

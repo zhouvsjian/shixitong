@@ -7,7 +7,8 @@
     "pages/sub/common/userinfo",
     "pages/sub/common/search",
     "pages/sub/common/joblist",
-    "pages/sub/common/jobdetail"
+    "pages/sub/common/jobdetail",
+    "pages/sub/common/companyinfo"
   ],
   "window": {
     "backgroundTextStyle": "light",

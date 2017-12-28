@@ -21,9 +21,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.func.req('user?token=wx111&openid=' + app.globalData.openid + '&phone='+this.data.phone + '&keyid=' + this.data.identify, {}, function (res) {
-      //console.log(res.length)
-      //this.setData({user:{}});
+    var that = this;
+    app.func.req('/user?token='+app.globalData.token+'&userid=' + app.globalData.userid, {}, function (res) {
+      console.log(res)
+      that.setData({user:res});
     });
   },
 
@@ -77,16 +78,24 @@ Page({
   },
 
   phoneInput: function(e){
+    var that = this;
     this.setData({
       user:{
-        phone:e.detail.value
+        name:this.data.user.name,
+        sex:this.data.user.sex,
+        phone:e.detail.value,
+        email:this.data.user.email
       }
     })
   },
 
   emailInput: function(e){
+     var that = this;
     this.setData({
       user:{
+        name:this.data.user.name,
+        sex:this.data.user.sex,
+        phone:this.data.user.phone,
         email:e.detail.value
       }
     })
@@ -102,11 +111,26 @@ Page({
         state:'edit'
       })
     }else if(this.data.state == "edit"){
-      this.setData({
-        buttonLabel:'编辑',
-        disabled:true,
-        state:'view'
-      })
+     var that = this;
+      var param = {};
+      param["userId"] = app.globalData.userid;
+			param["sex"] = this.data.user.sex;
+      param["phone"] = this.data.user.phone;
+      param["email"] =this.data.user.email;
+      param["token"] = app.globalData.token;
+       app.func.req('user/update', param, function (res) {
+         if(res == 1){
+           wx.showToast({
+             title:'修改成功'
+           });
+            that.setData({
+              buttonLabel:'编辑',
+              disabled:true,
+              state:'view'
+            })
+         }
+        console.log("update success"+res)
+      });
     }
   }
 })

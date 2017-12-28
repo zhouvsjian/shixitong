@@ -1,10 +1,11 @@
 var root = 'http://www.xiaoqt.net/';
+var Util = require('utils/util.js');
 function req(url,data,callback){
   wx.request({
     url: root+url,
-    data: data,
+    data: Util.json2Form(data),
     method: 'POST',
-    header: {'content-type':'application/json'},
+    header: {"Content-Type": "application/x-www-form-urlencoded" },
     success: function(res){
       return typeof callback == "function" && callback(res.data);
     },
