@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    jobdetail:{}
+    jobdetail:{},
+    jobid:''
   },
 
   /**
@@ -14,6 +15,9 @@ Page({
    */
   onLoad: function (options) {
     var jobid = options.id;
+    this.setData({
+      jobid:jobid
+    })
     if(jobid){
       var that = this;
       app.func.req("/work?token=" + app.globalData.token+"&jobid="+jobid+"&userid="+app.globalData.userid, {}, function (res) {
@@ -81,12 +85,23 @@ Page({
         return;
       }
     });
-    app.func.req('/work/apply/querynum?token='+app.globalData.token+'&userid=' + app.globalData.userid, {}, function (res) {
-      if(res.work){
+    app.func.req('/work/apply/querynum?token='+app.globalData.token+'&userid=' + app.globalData.userid+'&batchId='+app.globalData.batchid, {}, function (res) {
+      if(res < 5 && res != -2){
+         app.func.req('/work/apply?token='+app.globalData.token+'&userid=' + app.globalData.userid+'&batchId='+app.globalData.batchid+'&jobid='+this.data.jobid, {}, function (result) {
+          if(result == 1) {
+            wx.showToast({
+              title:"申请成功"
+            })
+          } else {
+            wx.showToast({
+              title:"申请失败"
+            })
+          }
+        });
+      }else{
         wx.showToast({
-          title:"实习中,不能申请"
+          title:"申请已达上限"
         })
-        return;
       }
     });
   }
