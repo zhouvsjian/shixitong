@@ -52,7 +52,7 @@
       <view class="weui-cell__bd">
          <textarea class="weui-textarea" disabled="disabled" value="{{jobdetail.DESCRIPTION}}" />
       </view>
-      <button class="weui-btn" type="primary" wx:if="{{jobdetail.APPLY_STATUS!='申请中'}}">申请</button>
+      <button class="weui-btn" type="primary" wx:if="{{jobdetail.APPLY_STATUS!='申请中'}}" bindtap="applyJob">申请</button>
     </view>
   </view>
 </view>

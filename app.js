@@ -53,6 +53,7 @@ App({
     openid:'',
     token:'wx111',
     userid:'',
-    roleid:''
+    roleid:'',
+    batchid:''
   }
 })

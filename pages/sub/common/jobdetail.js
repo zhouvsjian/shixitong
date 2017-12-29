@@ -71,5 +71,23 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  applyJob: function(e){
+     app.func.req('/user?token='+app.globalData.token+'&userid=' + app.globalData.userid, {}, function (res) {
+      if(res.work){
+        wx.showToast({
+          title:"实习中,不能申请"
+        })
+        return;
+      }
+    });
+    app.func.req('/work/apply/querynum?token='+app.globalData.token+'&userid=' + app.globalData.userid, {}, function (res) {
+      if(res.work){
+        wx.showToast({
+          title:"实习中,不能申请"
+        })
+        return;
+      }
+    });
   }
 })
