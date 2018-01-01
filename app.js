@@ -17,7 +17,7 @@ App({
             console.log('openid:'+openid);
           }else{
             wx.redirectTo({
-              url: '../binder/binder',
+              url: '../binder/binder'
             })
           }
         }); 
