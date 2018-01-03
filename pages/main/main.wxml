@@ -1,7 +1,7 @@
  <view class="page__bd">
     <view class="weui-grids">
         <view class="weui-grid" wx:for="{{menuData}}" wx:key="name">
-            <navigator url="{{item.url}}" hover-class="weui-grid_active">
+            <navigator url="{{item.url}}" hover-class="none">
                 <view class="glyphicon glyphicon-{{item.icon}}"></view>
                 <view class="weui-grid__label menulabel">{{item.name}}</view>
             </navigator>

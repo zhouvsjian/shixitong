@@ -33,7 +33,7 @@ Page({
     const weeks_ch = ['日', '一', '二', '三', '四', '五', '六'];
     this.calculateEmptyGrids(cur_year, cur_month);
     this.calculateDays(cur_year, cur_month);
-    this.getSystemInfo();
+    //this.getSystemInfo();
     this.setData({
       cur_year,
       cur_month,
