@@ -5,29 +5,50 @@
 </view>
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 80}}px" bindchange="bindChange">
   <swiper-item>
-    <scroll-view scroll-y="true" class="flex box box-tb box-pack-center box-align-center" style="height: {{scrollViewHeight*2}}rpx">
-  <view class="calendar pink-color box box-tb">
-        <view class="top-handle fs28 box box-lr box-align-center box-pack-center">
-            <view class="prev box box-rl" bindtap="handleCalendar" data-handle="prev">
-                <view class="prev-handle box box-lr box-align-center box-pack-center">《</view>
-            </view>
-            <view class="date-area box box-lr box-align-center box-pack-center">{{cur_year || "--"}} 年 {{cur_month || "--"}} 月</view>
-            <view class="next box box-lr" bindtap="handleCalendar" data-handle="next">
-                <view class="next-handle box box-lr box-align-center box-pack-center">》</view>
-            </view>
-        </view>
-        <view class="weeks box box-lr box-pack-center box-align-center">
-            <view class="flex week fs28" wx:for="{{weeks_ch}}" wx:key="{{index}}" data-idx="{{index}}">{{item}}</view>
-        </view>
-        <view class="days box box-lr box-wrap">
-            <view wx:if="{{hasEmptyGrid}}" class="grid white-color box box-align-center box-pack-center" wx:for="{{empytGrids}}" wx:key="{{index}}" data-idx="{{index}}">
-            </view>
-            <view class="grid white-color box box-align-center box-pack-center" wx:for="{{days}}" wx:key="{{index}}" data-idx="{{index}}">
-                <view class="day {{index >= 5 && index <= 13 ? 'border-radius pink-bg' : ''}} box box-align-center box-pack-center">{{item}}</view>
-            </view>
-        </view>
-    </view>
-</scroll-view>
+   <view class="calendar">  
+  <view class='bcfff'>  
+    <view class="weekName">  
+      <view class="monday">一</view>  
+      <view class="tuesday">二</view>  
+      <view class="wednesday">三</view>  
+      <view class="thursday">四</view>  
+      <view class="friday">五</view>  
+      <view class="saturday">六</view>  
+      <view class="sunday">日</view>  
+    </view>  
+    <view class="week">  
+  
+      <!--填补空格-->  
+      <view wx:for="{{nbsp}}">\n</view>  
+  
+      <!--循环日期-->  
+      <!-- 当天以前 -->  
+      <view wx:for="{{date-1}}" style="color:gainsboro;">  
+        <text wx:if="{{item+1==calendarSignData[item+1]}}" style="color: #2ccecb;">{{item+1}}</text>  
+        <text wx:else="">{{item+1}}</text>  
+      </view>  
+      <!-- 当天 -->  
+      <view style="">  
+        <text wx:if="{{is_qd}}" style="color: #2ccecb;">{{date}}</text>  
+        <text wx:else="" style="">{{date}}</text>  
+      </view>  
+      <!-- 以后 -->  
+      <view wx:for="{{monthDaySize-date}}">{{item+date+1}}</view>  
+    </view>  
+  </view>  
+  <view class="calendarSign">  
+    <image bindtap="calendarSign" class='btnimg' src='https://jpadmin.99dudesign.com/public/img/source/btn_icon_wodekaoqin1.png'></image>  
+     <!-- wx:if="{{date!=calendarSignData[date]}}" -->  
+  </view>  
+</view>  
+<!-- 签到成功 -->  
+<view class='zhegai hide {{qdView?"block":""}}' bindtap='quxiaoQd'></view>  
+<view class='successqd hide {{qdView?"block":""}}'>  
+  <view class='qdtitle'>签到成功</view>  
+   <view class='qdcontent' wx:if="{{is_qd}}">今天已经签过了~</view>  
+  <view class='qdcontent' wx:else>签到成功，获得{{integral}}积分，您已连续签到{{rule}}天！</view>  
+  <view class='queding' bindtap='quxiaoQd'>确定</view>  
+</view>  
   </swiper-item>
   <swiper-item>
     <view>关注</view>

@@ -1,5 +1,9 @@
 // pages/sub/student/attendance.js
-var app = getApp()
+var app = getApp();
+var calendarSignData;  
+var date;  
+var calendarSignDay;  
+var is_qd;
 Page({
 
   /**
@@ -10,9 +14,18 @@ Page({
     winHeight: 0,
     // tab切换 
     currentTab: 0,
-    hasEmptyGrid: false
+    qdView: false,  
+    calendarSignData: "",  
+    calendarSignDay: "",  
+    is_qd: false
   },
-
+ quxiaoQd: function (e) {  
+    var that = this;  
+    that.setData({  
+      qdView: false,  
+      is_qd: true  
+    })  
+  }, 
   /**
    * 生命周期函数--监听页面加载
    */
@@ -27,18 +40,42 @@ Page({
       }
 
     });
-    const date = new Date();
-    const cur_year = date.getFullYear();
-    const cur_month = date.getMonth() + 1;
-    const weeks_ch = ['日', '一', '二', '三', '四', '五', '六'];
-    this.calculateEmptyGrids(cur_year, cur_month);
-    this.calculateDays(cur_year, cur_month);
-    //this.getSystemInfo();
-    this.setData({
-      cur_year,
-      cur_month,
-      weeks_ch
-    })
+    var mydate = new Date();  
+    var year = mydate.getFullYear();  
+    var month = mydate.getMonth() + 1;  
+    date = mydate.getDate();  
+    console.log("date" + date)  
+    var day = mydate.getDay();  
+    console.log(day)  
+    var nbsp = 7 - ((date - day) % 7);  
+    console.log("nbsp" + nbsp);  
+    var monthDaySize;  
+    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {  
+      monthDaySize = 31;  
+    } else if (month == 4 || month == 6 || month == 9 || month == 11) {  
+      monthDaySize = 30;  
+    } else if (month == 2) {  
+      // 计算是否是闰年,如果是二月份则是29天  
+      if ((year - 2000) % 4 == 0) {  
+        monthDaySize = 29;  
+      } else {  
+        monthDaySize = 28;  
+      }  
+    };
+     calendarSignData = wx.getStorageSync("calendarSignData")  
+        calendarSignDay = wx.getStorageSync("calendarSignDay")  
+        console.log(calendarSignData);  
+        console.log(calendarSignDay)  
+        that.setData({  
+          is_qd: is_qd,  
+          year: year,  
+          month: month,  
+          nbsp: nbsp,  
+          monthDaySize: monthDaySize,  
+          date: date,  
+          calendarSignData: calendarSignData,  
+          calendarSignDay: calendarSignDay  
+        })    
   },
 
   /**
@@ -106,79 +143,39 @@ Page({
       })
     }
   },
-  // 获取当月共多少天
-  getThisMonthDays(year, month) {
-    return new Date(year, month, 0).getDate();
-  },
-  // 获取当月第一天星期几
-  getFirstDayOfWeek(year, month) {
-    return new Date(Date.UTC(year, month - 1, 1)).getDay();
-  },
-  // 计算当月1号前空了几个格子
-  calculateEmptyGrids(year, month) {
-    const firstDayOfWeek = this.getFirstDayOfWeek(year, month);
-    let empytGrids = [];
-    if (firstDayOfWeek > 0) {
-      for (let i = 0; i < firstDayOfWeek; i++) {
-        empytGrids.push(i);
-      }
-      this.setData({
-        hasEmptyGrid: true,
-        empytGrids
-      });
-    } else {
-      this.setData({
-        hasEmptyGrid: false,
-        empytGrids: []
-      });
-    }
-  },
-  // 绘制当月天数占的格子
-  calculateDays(year, month) {
-    let days = [];
-    const thisMonthDays = this.getThisMonthDays(year, month);
-    for (let i = 1; i <= thisMonthDays; i++) {
-      days.push(i);
-    }
-    this.setData({
-      days
-    });
-  },
-  // 切换控制年月
-  handleCalendar(e) {
-    const handle = e.currentTarget.dataset.handle;
-    const cur_year = this.data.cur_year;
-    const cur_month = this.data.cur_month;
-    if (handle === 'prev') {
-      let newMonth = cur_month - 1;
-      let newYear = cur_year;
-      if (newMonth < 1) {
-        newYear = cur_year - 1;
-        newMonth = 12;
-      }
+ calendarSign: function (e) {  
+    var that = this;  
+    that.setData({  
+      qdView: true  
+    })  
+    calendarSignData[date] = date;  
+    console.log(calendarSignData);  
+    calendarSignDay = calendarSignDay + 1;  
+    var today = new Date().getDate()  
+    wx.request({  
+      url: getApp().data.host + '后台的接口',  
+      method: "POST",  
+      data: {  
+        "user_id": wx.getStorageSync('user_id'),  
+        "sign_num": today  
+      },  
+      header: {  
+        'content-type': 'application/x-www-form-urlencoded' //通过post传值，所以要加header  
+      },  
+      success: function (res) {  
+        that.setData({  
+          rule: res.data.rule,  
+          integral: res.data.integral,  
+        })  
+      }  
+    })  
   
-      this.calculateDays(newYear, newMonth);
-      this.calculateEmptyGrids(newYear, newMonth);
+    wx.setStorageSync("calendarSignData", calendarSignData);  
+    wx.setStorageSync("calendarSignDay", calendarSignDay);  
   
-      this.setData({
-        cur_year: newYear,
-        cur_month: newMonth
-      })
-      } else {
-      let newMonth = cur_month + 1;
-      let newYear = cur_year;
-      if (newMonth > 12) {
-        newYear = cur_year + 1;
-        newMonth = 1;
-      }
-  
-      this.calculateDays(newYear, newMonth);
-      this.calculateEmptyGrids(newYear, newMonth);
-  
-      this.setData({
-        cur_year: newYear,
-        cur_month: newMonth
-      })
-    }
+    this.setData({  
+      calendarSignData: calendarSignData,  
+      calendarSignDay: calendarSignDay  
+    })  
   }
 })
