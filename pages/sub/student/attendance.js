@@ -1,8 +1,9 @@
 // pages/sub/student/attendance.js
 var app = getApp();
-var calendarSignData;  
-var date;  
-var calendarSignDay;  
+var bmap = require('../../../libs/bmap-wx.min.js');
+var calendarSignData;
+var date;
+var calendarSignDay;
 var is_qd;
 Page({
 
@@ -14,18 +15,11 @@ Page({
     winHeight: 0,
     // tab切换 
     currentTab: 0,
-    qdView: false,  
-    calendarSignData: "",  
-    calendarSignDay: "",  
+    qdView: false,
+    calendarSignData: "",
+    calendarSignDay: "",
     is_qd: false
   },
- quxiaoQd: function (e) {  
-    var that = this;  
-    that.setData({  
-      qdView: false,  
-      is_qd: true  
-    })  
-  }, 
   /**
    * 生命周期函数--监听页面加载
    */
@@ -40,42 +34,55 @@ Page({
       }
 
     });
-    var mydate = new Date();  
-    var year = mydate.getFullYear();  
-    var month = mydate.getMonth() + 1;  
-    date = mydate.getDate();  
-    console.log("date" + date)  
-    var day = mydate.getDay();  
-    console.log(day)  
-    var nbsp = 7 - ((date - day) % 7);  
-    console.log("nbsp" + nbsp);  
-    var monthDaySize;  
-    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {  
-      monthDaySize = 31;  
-    } else if (month == 4 || month == 6 || month == 9 || month == 11) {  
-      monthDaySize = 30;  
-    } else if (month == 2) {  
+   
+    var mydate = new Date();
+    var year = mydate.getFullYear();
+    var month = mydate.getMonth() + 1;
+    date = mydate.getDate();
+    console.log("date" + date)
+    var day = mydate.getDay();
+    console.log(day)
+    var nbsp = 7 - ((date - day) % 7);
+    console.log("nbsp" + nbsp);
+    var monthDaySize;
+    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+      monthDaySize = 31;
+    } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+      monthDaySize = 30;
+    } else if (month == 2) {
       // 计算是否是闰年,如果是二月份则是29天  
-      if ((year - 2000) % 4 == 0) {  
-        monthDaySize = 29;  
-      } else {  
-        monthDaySize = 28;  
-      }  
+      if ((year - 2000) % 4 == 0) {
+        monthDaySize = 29;
+      } else {
+        monthDaySize = 28;
+      }
     };
-     calendarSignData = wx.getStorageSync("calendarSignData")  
-        calendarSignDay = wx.getStorageSync("calendarSignDay")  
-        console.log(calendarSignData);  
-        console.log(calendarSignDay)  
-        that.setData({  
-          is_qd: is_qd,  
-          year: year,  
-          month: month,  
-          nbsp: nbsp,  
-          monthDaySize: monthDaySize,  
-          date: date,  
-          calendarSignData: calendarSignData,  
-          calendarSignDay: calendarSignDay  
-        })    
+    var rawData = [2, 3,7,16];
+    var is_qd;
+    calendarSignData = new Array(monthDaySize)
+    for (var i in rawData) {
+      parseInt(rawData[i])
+      calendarSignData[parseInt(rawData[i])] = parseInt(rawData[i])
+
+      if (parseInt(rawData[i]) == date) {
+        console.log(1)
+        is_qd = true
+      } else {
+
+      }
+    }
+    console.log(calendarSignData);
+    console.log(calendarSignDay)
+    that.setData({
+      is_qd: false,
+      year: year,
+      month: month,
+      nbsp: nbsp,
+      monthDaySize: monthDaySize,
+      date: date,
+      calendarSignData: calendarSignData,
+      calendarSignDay: calendarSignDay
+    })
   },
 
   /**
@@ -143,39 +150,42 @@ Page({
       })
     }
   },
- calendarSign: function (e) {  
-    var that = this;  
-    that.setData({  
-      qdView: true  
-    })  
-    calendarSignData[date] = date;  
-    console.log(calendarSignData);  
-    calendarSignDay = calendarSignDay + 1;  
-    var today = new Date().getDate()  
-    wx.request({  
-      url: getApp().data.host + '后台的接口',  
-      method: "POST",  
-      data: {  
-        "user_id": wx.getStorageSync('user_id'),  
-        "sign_num": today  
-      },  
-      header: {  
-        'content-type': 'application/x-www-form-urlencoded' //通过post传值，所以要加header  
-      },  
-      success: function (res) {  
-        that.setData({  
-          rule: res.data.rule,  
-          integral: res.data.integral,  
-        })  
-      }  
-    })  
-  
-    wx.setStorageSync("calendarSignData", calendarSignData);  
-    wx.setStorageSync("calendarSignDay", calendarSignDay);  
-  
-    this.setData({  
-      calendarSignData: calendarSignData,  
-      calendarSignDay: calendarSignDay  
-    })  
+  quxiaoQd: function (e) {
+    var that = this;
+    that.setData({
+      qdView: false,
+      is_qd: true
+    })
+  },
+  calendarSign: function (e) {
+    wx.showLoading({
+      title: '位置获取中',
+    });
+    var BMap = new bmap.BMapWX({
+      ak: 'B5795efa22d09926a581079b455af7db'
+    });
+    var fail = function(data) { 
+            console.log(data) 
+        }; 
+    var success = function(data) {
+        wx.hideToast(); 
+        var wxMarkerData = data.wxMarkerData; 
+        console.log("longitude:"+wxMarkerData[0].address );
+        wx.showModal({
+          title:"位置确认",
+          content:"您当前的位置是:"+wxMarkerData[0].address+"附近",
+          showCancel:false,
+          success:function(){
+            wx.showToast({
+              title:"签到成功"
+            })
+          }
+        })
+    } 
+    // 发起regeocoding检索请求 
+    BMap.regeocoding({ 
+        fail: fail, 
+        success: success
+    }); 
   }
 })
