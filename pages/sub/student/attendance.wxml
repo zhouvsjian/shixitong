@@ -51,6 +51,39 @@
     </view>
   </swiper-item>
   <swiper-item>
-    <view>关注</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <label>
+          <view>开始时间</view> 
+        </label>
+        <picker bindchange='bindBeginDate'  mode='date' value='{{region}}' start="{{beginDate}}">
+            <input type="text" placeholder="请选择开始时间" disabled="disabled" value="{{beginDate}}"/>
+        </picker>
+      </view>
+    
+      <view class="weui-cell weui-cell_input">
+        <label>
+          <view >结束时间</view> 
+        </label>
+         <picker bindchange='bindEndDate' mode='date' start="{{beginDate}}">
+           <input type="text" placeholder="请选择结束时间" disabled="disabled" value="{{endDate}}"/>
+        </picker>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <label>
+          <view>持续时间</view> 
+        </label>
+         <input type="number" placeholder="请输入持续时间" bindinput="bindDuration"/>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <label>
+          <view>请假事由</view> 
+        </label>
+      </view>
+      <view class="weui-cell__bd">
+         <textarea class="weui-textarea" placeholder='请假事由' bindinput="bindReason"/>
+      </view>
+      <button type="primary" bindtap="submit">提交</button>
+    </view>
   </swiper-item>
 </swiper>

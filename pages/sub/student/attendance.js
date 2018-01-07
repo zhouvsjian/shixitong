@@ -1,4 +1,5 @@
 // pages/sub/student/attendance.js
+var Util = require('../../../utils/util.js');
 var app = getApp();
 var bmap = require('../../../libs/bmap-wx.min.js');
 var calendarSignData;
@@ -18,7 +19,12 @@ Page({
     qdView: false,
     calendarSignData: "",
     calendarSignDay: "",
-    is_qd: false
+    is_qd: false,
+    signed:[],
+    beginDate:'',
+    endDate:'',
+    duration:'',
+    reason:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -32,18 +38,42 @@ Page({
           winHeight: res.windowHeight
         });
       }
+    });
 
+    app.func.req('/list/sign?userId='+app.globalData.userid+'&batchId='+app.globalData.batchid+'&token='+app.globalData.token, {}, function (res) {
+      if(!res || res.length==0){
+        that.setData({
+          signed:[]
+        });
+      }else{
+        var signTime;
+        var signList = [];
+        for(var i=0;i<res.length;i++){
+          signTime = new Date(res[i].signTime);
+          if(signTime.getMonth()==new Date().getMonth()){
+            signList.push(signTime.getDate());
+          }
+          if(signTime.getDate()==new Date().getDate()){
+            that.setData({
+              is_qd:true
+            });
+          }
+        }
+        that.setData({
+          signed:signList
+        });
+      }
     });
    
     var mydate = new Date();
+    this.setData({
+      beginDate:Util.formatDate(mydate)
+    });
     var year = mydate.getFullYear();
     var month = mydate.getMonth() + 1;
     date = mydate.getDate();
-    console.log("date" + date)
     var day = mydate.getDay();
-    console.log(day)
     var nbsp = 7 - ((date - day) % 7);
-    console.log("nbsp" + nbsp);
     var monthDaySize;
     if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
       monthDaySize = 31;
@@ -57,24 +87,13 @@ Page({
         monthDaySize = 28;
       }
     };
-    var rawData = [2, 3,7,16];
-    var is_qd;
+    var rawData = this.data.signed;
     calendarSignData = new Array(monthDaySize)
     for (var i in rawData) {
       parseInt(rawData[i])
-      calendarSignData[parseInt(rawData[i])] = parseInt(rawData[i])
-
-      if (parseInt(rawData[i]) == date) {
-        console.log(1)
-        is_qd = true
-      } else {
-
-      }
+      calendarSignData[parseInt(rawData[i])] = parseInt(rawData[i]);
     }
-    console.log(calendarSignData);
-    console.log(calendarSignDay)
     that.setData({
-      is_qd: false,
       year: year,
       month: month,
       nbsp: nbsp,
@@ -158,6 +177,12 @@ Page({
     })
   },
   calendarSign: function (e) {
+    if(this.data.is_qd){
+      wx.showToast({
+        title:'今天已经签到过'
+      });
+      return;
+    }
     wx.showLoading({
       title: '位置获取中',
     });
@@ -176,9 +201,45 @@ Page({
           content:"您当前的位置是:"+wxMarkerData[0].address+"附近",
           showCancel:false,
           success:function(){
-            wx.showToast({
-              title:"签到成功"
-            })
+            var param = {};
+            param.userId = app.globalData.userid;
+            param.location = wxMarkerData[0].address;
+            param.x = wxMarkerData[0].latitude;
+            param.y = wxMarkerData[0].longitude;
+            param.token = app.globalData.token;
+            param.batchId = app.globalData.batchid;
+            var that = this;
+            app.func.req('/sign?', param, function (res) {
+              if(res == 1){
+                wx.showToast({
+                  title:"签到成功"
+                });
+                app.func.req('/list/sign?userId='+app.globalData.userid+'&batchId='+app.globalData.batchid+'&token='+app.globalData.token, {}, function (res) {
+                  if(!res || res.length==0){
+                    that.setData({
+                      signed:[]
+                    });
+                  }else{
+                    var signTime;
+                    var signList = [];
+                    for(var i=0;i<res.length;i++){
+                      signTime = new Date(res[i].signTime);
+                      if(signTime.getMonth()==new Date().getMonth()){
+                        signList.push(signTime.getDate());
+                      }
+                      if(signTime.getDate()==new Date().getDate()){
+                        that.setData({
+                          is_qd:true
+                        });
+                      }
+                    }
+                    that.setData({
+                      signed:signList
+                    });
+                  }
+                });
+              }
+            });
           }
         })
     } 
@@ -187,5 +248,49 @@ Page({
         fail: fail, 
         success: success
     }); 
+  },
+  bindBeginDate: function(e){
+    this.setData({
+      beginDate:e.detail.value
+    })
+  },
+  bindEndDate: function(e){
+    this.setData({
+      endDate:e.detail.value
+    })
+  },
+  bindDuration: function(e){
+    this.setData({
+      duration:e.detail.value
+    })
+  },
+  bindReason: function(e){
+    this.setData({
+      reason:e.detail.value
+    })
+  },
+  submit: function(e){
+    var param = {};
+    param.userId = app.globalData.userid;
+    param.startTime = this.data.beginDate;
+    param.endTime = this.data.endDate;
+    param.day = this.data.duration;
+    param.reason = this.data.reason;
+    param.batchId = app.globalData.batchid;
+    param.token = app.globalData.token;
+    var that = this;
+    app.func.req('/vacation?', param, function (res) {
+      if(res==1){
+        wx.showToast({
+          title:'提交成功'
+        });
+        that.setData({
+          beginDate:'',
+          endDate:'',
+          duration:'',
+          reason:''
+        })
+      }
+    });
   }
 })

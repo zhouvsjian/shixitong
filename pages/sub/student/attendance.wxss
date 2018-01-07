@@ -154,3 +154,15 @@
   border-top: 1rpx solid #ccc;
   padding: 20rpx;
 }
+.weui-cell_input{
+    height: 50px;
+}
+.weui-cell_input label{
+    width: 100px;
+}
+input{
+  border-width: 2px;
+  border-style: inset;
+  border-radius:3px;
+  width:150px;
+}
