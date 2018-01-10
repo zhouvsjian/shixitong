@@ -251,7 +251,8 @@ Page({
   },
   bindBeginDate: function(e){
     this.setData({
-      beginDate:e.detail.value
+      beginDate:e.detail.value,
+      endDate:''
     })
   },
   bindEndDate: function(e){
