@@ -1,0 +1,14 @@
+<!--pages/sub/common/newsdetail.wxml-->
+<import src="../../../wxParse/wxParse.wxml"/> 
+<view class="wxParse">
+    <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+</view>
+<view class="page__bd">
+    <view class="page__title">{{title}}</view>
+   <view class="page__bd">
+    <view>{{publish_time}}</view>
+    <view class="wxParse">
+     <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+    </view>
+  </view>
+</view>

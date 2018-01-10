@@ -9,7 +9,9 @@
     "pages/sub/common/joblist",
     "pages/sub/common/jobdetail",
     "pages/sub/common/companyinfo",
-    "pages/sub/student/attendance"
+    "pages/sub/student/attendance",
+    "pages/sub/common/news",
+    "pages/sub/common/newsdetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
