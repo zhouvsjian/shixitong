@@ -11,7 +11,11 @@
     "pages/sub/common/companyinfo",
     "pages/sub/student/attendance",
     "pages/sub/common/news",
-    "pages/sub/common/newsdetail"
+    "pages/sub/common/newsdetail",
+    "pages/sub/common/message",
+    "pages/sub/student/register",
+    "pages/sub/student/apply",
+    "pages/sub/student/applydetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,4 @@
+/* pages/sub/student/applydetail.wxss */
+.weui-label{
+    color: #0088ff;
+}

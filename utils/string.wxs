@@ -1,0 +1,18 @@
+var filter = {
+  getApplyStatus: function (statusid) {
+    var status;
+    if (statusid == 1) {
+      status = "申请通过";
+    }
+    else if (statusid == 0) {
+      status = "不通过";
+    }
+    else {
+      status = "申请中";
+    }
+    return status; 
+  }
+}
+module.exports = {
+  getApplyStatus: filter.getApplyStatus
+}

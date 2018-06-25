@@ -1,0 +1,65 @@
+<!--pages/sub/student/applydetail.wxml-->
+<wxs module="filter" src="../../../utils/string.wxs"></wxs>
+<view class="page">
+  <view class="page__hd">
+    <view class="weui-cells__title">{{job.POST_NAME}}</view>
+     <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+              <view class="weui-label">职位名称</view>
+          </view>
+          <view class="weui-cell__bd">
+              <input class="weui-input"  type="text" value="{{job.POST_NAME}}" disabled="disabled"/>
+          </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+              <view class="weui-label">公司名称</view>
+          </view>
+          <view class="weui-cell__bd">
+            <navigator  url="../common/companyinfo?companyid={{job.COMPANY_ID}}" hover-class="navigator-hover">
+                <input class="weui-input"  type="text" value="{{job.COMPANY_NAME}}" style="display: inline-block; vertical-align: middle" disabled="disabled"/>
+                <view class="weui-badge" style="margin-left: 5px;">详</view>
+            </navigator>
+          </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+              <view class="weui-label">申请日期</view>
+          </view>
+          <view class="weui-cell__bd">
+              <input class="weui-input"  type="text" value="{{job.APPLY_TIME}}" disabled="disabled"/>
+          </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+              <view class="weui-label">公司地址</view>
+          </view>
+          <view class="weui-cell__bd">
+              <input class="weui-input"  type="text" value="{{job.LOCATION}}" disabled="disabled"/>
+          </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+              <view class="weui-label">申请状态</view>
+          </view>
+          <view class="weui-cell__bd">
+              <input class="weui-input"  type="text" value="{{filter.getApplyStatus(job.APPLY_STATUS)}}" disabled="disabled"/>
+          </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+              <view class="weui-label">职位描述</view>
+          </view>
+          <view class="weui-cell__bd">
+              <textarea class="weui-textarea"   value="{{job.DESCRIPTION}}" style="height:200px" disabled="disabled"/>
+          </view>
+      </view>
+    </view>
+    <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" bindtap="unApply" wx:if="{{job.APPLY_STATUS == -1}}">撤销申请</button>
+    </view>
+  </view>
+</view>
+

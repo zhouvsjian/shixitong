@@ -1,0 +1,184 @@
+<!--pages/sub/student/register.wxml-->
+<view class="page">
+  <view class="page__hd">
+    <view class="weui-cells__title">实习登记</view>
+     <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+              <view class="weui-label">企业名称</view>
+          </view>
+          <view class="weui-cell__bd">
+              <input class="weui-input" placeholder="请输入企业名称" type="text" value="{{epName}}" bindinput='epNameInput'/>
+          </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">地区</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{tempMultiIndex}}" range="{{tempMultiArray}}">  
+            <view class="picker">  
+            <input class="weui-input" placeholder="请选择地区" disabled="disabled" value="{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}  "/>
+            </view>  
+          </picker>  
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">详细地址</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入详细地址" value="{{address}}" bindinput="addrInput"/>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">企业性质</view>
+        </view>
+        <view class="weui-cell__bd">
+         <picker bindchange="bindCatagoryChange" value="{{catagoryIndex}}" range="{{catagory}}" range-key="name">
+             <input class="weui-input"  disabled="disabled" value="{{catagory[catagoryIndex].name}}  "/>
+          </picker>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">企业规模</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindScaleChange" value="{{scaleIndex}}" range="{{scaleArray}}">
+             <input class="weui-input"  disabled="disabled" value="{{scaleArray[scaleIndex]}}  "/>
+          </picker>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">行业</view>
+        </view>
+         <view class="weui-cell__bd">
+         <picker bindchange="bindIndustryChange" value="{{industryIndex}}" range="{{industry}}" range-key="name">
+             <input class="weui-input"  disabled="disabled" value="{{industry[industryIndex].name}}  "/>
+          </picker>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">实习岗位</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入实习岗位" value="{{post}}" bindinput="postInput"/>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">签订实习协议</view>
+        </view>
+        <view class="weui-cell__bd">
+          <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__ft">
+                    <switch  bindchange="changeAgreement"/>
+                </view>
+            </view>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input" hidden="{{!haveAgreement}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">协议照片</view>
+        </view>
+        <view class="weui-cell__bd">
+          <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderFiles">
+                    <block wx:for="{{files}}" wx:key="*this">
+                        <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                            <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                        </view>
+                    </block>
+                </view>
+                <view class="weui-uploader__input-box">
+                    <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+            </view>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">购买实习保险 </view>
+        </view>
+        <view class="weui-cell__bd">
+          <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__ft">
+                    <switch  bindchange="changeInsurance"/>
+                </view>
+            </view>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input" hidden="{{!haveInsurance}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">保险单位名称及保险单号</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="保险单位名称及保险单号" value="{{insurance}}" bindinput="insuranceInput"/>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">联系人姓名</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="联系人姓名" value="{{contactName}}" bindinput="contactNameInput"/>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">联系人电话</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入联系人电话" value="{{contactTele}}" bindinput="contactTeleInput"/>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">联系人职务</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入联系人职务" value="{{contactTitle}}" bindinput="contactTitleInput"/>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">师傅姓名</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入师傅姓名" value="{{masterName}}" bindinput="masterNameInput"/>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">师傅电话</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入师傅电话" value="{{masterTele}}" bindinput="masterTeleInput"/>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">师傅技能</view>
+        </view>
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="请输入师傅技能" value="{{masterSkill}}" bindinput="masterSkillInput" style="height: 130px"/>
+        </view>
+      </view>
+       <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">企业简介</view>
+        </view>
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="请输入企业简介" value="{{summary}}" bindinput="summaryInput" style="height: 130px"/>
+        </view>
+      </view>
+    </view>
+    <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" bindtap="onRegister">{{curCompany?'变更':'登记'}}</button>
+    </view>
+  </view>
+</view>

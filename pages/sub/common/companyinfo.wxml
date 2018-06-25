@@ -1,7 +1,7 @@
 <!--pages/sub/common/companyinfo.wxml-->
 <view class="page__bd">
-    <view class="page__title">{{company.NAME}}</view>
    <view class="page__bd">
+   <view class="weui-cells__title">{{company.NAME}}</view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
          <view class="weui-cell__hd">

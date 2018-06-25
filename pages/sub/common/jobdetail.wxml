@@ -1,11 +1,12 @@
 <!--pages/sub/common/jobdetail.wxml-->
 <view class="page__bd">
-    <view class="page__title">{{jobdetail.POST_NAME}}</view>
    <view class="page__bd">
+    <view class="weui-cells__title">{{jobdetail.POST_NAME}}</view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
         <navigator class="list-item" url="companyinfo?companyid={{jobdetail.COMPANY_ID}}" hover-class="navigator-hover">
-            <text class="company-name">{{jobdetail.COMPANY_NAME}}</text>
+            <text class="company-name"  style="display: inline-block; vertical-align: middle">{{jobdetail.COMPANY_NAME}}</text>
+            <view class="weui-badge" style="margin-left: 5px;">详</view>
         </navigator>
       </view>
       <view class="weui-cell weui-cell_input">

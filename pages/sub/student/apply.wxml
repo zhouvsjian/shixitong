@@ -1,0 +1,24 @@
+<!--pages/sub/student/apply.wxml-->
+<wxs module="filter" src="../../../utils/string.wxs"></wxs>
+<view class="page__bd">
+  <view class="page__hd">
+    <view class="weui-cells__title">我的申请</view>
+     <view class="weui-cells weui-cells_after-title">
+        <scroll-view class="scroll" scroll-y="true">
+            <view wx:for="{{applylist}}" wx:key="name">
+                <navigator class="list-item" url="applydetail?rowid={{index}}" hover-class="navigator-hover">
+                    <view class="right">
+                        <text class="title">{{item.POST_NAME}}</text>
+                        <text class="weui-cell__ft">{{item.APPLY_TIME}}</text>
+                    </view>
+                    <view>
+                        <text class="intro">{{item.COMPANY_NAME}}</text>
+                        <text class="weui-cell__ft text-info">{{filter.getApplyStatus(item.APPLY_STATUS)}}</text>
+                    </view>
+                    
+                </navigator>
+            </view>
+        </scroll-view>
+        </view>
+    </view>
+</view>
